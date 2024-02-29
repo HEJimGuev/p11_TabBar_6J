@@ -1,41 +1,73 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(AppTabBar());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
+class AppTabBar extends StatelessWidget {
+  const AppTabBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
+      debugShowCheckedModeBanner: false,
+      title: "Flutter Learning",
       theme: ThemeData(
-        // useMaterial3: true,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MiPaginaInicial(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});  
+class MiPaginaInicial extends StatefulWidget {
+  @override
+  State<MiPaginaInicial> createState() => _MiPaginaInicialState();
+}
 
+class _MiPaginaInicialState extends State<MiPaginaInicial> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
-      ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(tabs: [
+            Tab(
+              text: "Vuelos",
+              icon: Icon(Icons.flight),
+            ),
+            Tab(
+              text: "Hoteles",
+              icon: Icon(Icons.hotel_class),
+            ),
+            Tab(text: "Comidas", icon: Icon(Icons.restaurant)),
+            Tab(
+              text: "Destinos",
+              icon: Icon(Icons.location_on),
+            ),
+          ]),
+          title: Text("TabBar Haydee Jimenez"),
+        ),
+        body: TabBarView(
+          children: const <Widget>[
+            Center(
+              child: Text("Vuelos",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+            ),
+            Center(
+              child: Text("Hoteles",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+            ),
+            Center(
+              child: Text("Restaurantes",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+            ),
+            Center(
+              child: Text("Destinos",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+            ),
+          ],
         ),
       ),
     );
